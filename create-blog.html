@@ -1,0 +1,955 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create a New Blog | BlogSpace</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    color: #191442;
+    background: #f6eaff;
+    min-height: 100vh;
+}
+
+button, input, select {
+    font-family: inherit;
+}
+
+.topbar {
+    height: 82px;
+    background: rgba(255,255,255,.75);
+    border-bottom: 1px solid #ead8ff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3.5%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    gap: 25px;
+}
+
+.logo {
+    text-decoration: none;
+    color: #17123f;
+    font-size: 27px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.logo i {
+    color: #8b46e8;
+    font-size: 30px;
+    margin-right: 8px;
+}
+
+.top-nav {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.top-nav a {
+    text-decoration: none;
+    color: #191442;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 13px 17px;
+    border-radius: 30px;
+}
+
+.top-nav a.active {
+    background: #eac5ff;
+    color: #6429b4;
+}
+
+.search-box {
+    width: 310px;
+    height: 45px;
+    border: 1px solid #e7d4ff;
+    border-radius: 30px;
+    background: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 17px;
+    color: #8272ad;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+}
+
+.top-icons {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    font-size: 22px;
+}
+
+.top-icons a {
+    color: #17123f;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: linear-gradient(135deg,#a86bff,#f7a9dc);
+}
+
+.page-layout {
+    display: grid;
+    grid-template-columns: 225px minmax(0,1fr);
+    gap: 22px;
+    padding: 22px 2.5%;
+    max-width: 1700px;
+    margin: auto;
+}
+
+.sidebar {
+    background: rgba(255,255,255,.7);
+    border: 1px solid #ecd8ff;
+    border-radius: 25px;
+    padding: 20px 15px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 13px;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: #17123f;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 14px;
+}
+
+.sidebar a i {
+    width: 22px;
+    font-size: 19px;
+}
+
+.sidebar a.active {
+    background: linear-gradient(110deg,#e8c4ff,#dcb4fa);
+    color: #5422a4;
+}
+
+.sidebar a:hover {
+    background: #f0e1ff;
+}
+
+.sidebar-divider {
+    height: 1px;
+    background: #eadcf7;
+    margin: 15px 5px;
+}
+
+.category-heading {
+    font-weight: 800;
+    margin: 17px 10px 10px;
+    font-size: 16px;
+}
+
+.sidebar .category {
+    padding: 11px 13px;
+    font-weight: 600;
+}
+
+.sidebar .category i {
+    color: #a45bdf;
+}
+
+.sidebar-note {
+    margin-top: 25px;
+    background: linear-gradient(145deg,#fff0ba,#ffe4a5);
+    padding: 20px;
+    border-radius: 13px;
+    transform: rotate(-3deg);
+    text-align: center;
+    font-family: 'Caveat',cursive;
+    font-size: 23px;
+    color: #30204e;
+}
+
+.main-content {
+    min-width: 0;
+}
+
+.heading {
+    position: relative;
+    padding: 0 5px 22px;
+}
+
+.heading h1 {
+    font-family: 'Caveat',cursive;
+    font-size: clamp(35px,4vw,53px);
+    color: #54219c;
+    font-weight: 700;
+}
+
+.heading p {
+    font-size: 16px;
+    color: #30245d;
+    margin-top: 3px;
+}
+
+.editor-layout {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) 340px;
+    gap: 20px;
+    align-items: start;
+}
+
+.editor-card, .settings-card {
+    background: rgba(255,255,255,.88);
+    border: 1px solid #e5caff;
+    border-radius: 27px;
+    box-shadow: 0 8px 30px rgba(113,65,165,.09);
+}
+
+.editor-card {
+    padding: 28px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label, .section-label {
+    display: block;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 11px;
+}
+
+.form-group label i {
+    color: #9950e0;
+    margin-right: 8px;
+}
+
+.required {
+    color: #ed4545;
+}
+
+input[type="text"], select {
+    width: 100%;
+    height: 46px;
+    border: 1.5px solid #d9b4ff;
+    border-radius: 15px;
+    padding: 0 16px;
+    outline: none;
+    background: #fffaff;
+    color: #30245d;
+    font-size: 14px;
+}
+
+input:focus, select:focus {
+    border-color: #9144e5;
+    box-shadow: 0 0 0 3px rgba(145,68,229,.1);
+}
+
+.upload-area {
+    min-height: 155px;
+    border: 2px dashed #c78bfa;
+    border-radius: 18px;
+    background: linear-gradient(135deg,#faf0ff,#fff8ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area i {
+    color: #7733c7;
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.upload-area strong {
+    display: block;
+    font-size: 16px;
+}
+
+.upload-area span {
+    color: #756a9e;
+    font-size: 13px;
+    display: block;
+    margin-top: 6px;
+}
+
+.upload-area input {
+    display: none;
+}
+
+#imagePreview {
+    display: none;
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 10px;
+    border: 1.5px solid #e0c8fa;
+    border-radius: 15px 15px 0 0;
+    background: #fffaff;
+}
+
+.toolbar button, .toolbar select {
+    border: none;
+    background: transparent;
+    color: #21184c;
+    padding: 8px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 15px;
+    width: auto;
+    height: auto;
+}
+
+.toolbar button:hover {
+    background: #f0e0ff;
+}
+
+.toolbar select {
+    font-size: 13px;
+    border-radius: 7px;
+}
+
+#blogContent {
+    width: 100%;
+    min-height: 310px;
+    padding: 20px;
+    border: 1.5px solid #e0c8fa;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    outline: none;
+    font-size: 15px;
+    line-height: 1.8;
+    background: #fffaff;
+    color: #30245d;
+}
+
+#blogContent:empty:before {
+    content: attr(data-placeholder);
+    color: #9283b9;
+}
+
+.editor-footer {
+    display: flex;
+    justify-content: space-between;
+    color: #8375a7;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.settings-card {
+    padding: 25px;
+    position: sticky;
+    top: 100px;
+}
+
+.settings-card h2 {
+    font-size: 20px;
+    margin-bottom: 23px;
+}
+
+.settings-group {
+    margin-bottom: 22px;
+}
+
+.settings-group label {
+    display: block;
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 9px;
+}
+
+.tags-input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 10px;
+}
+
+.tag {
+    background: #efd9ff;
+    color: #6124a9;
+    padding: 7px 11px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.visibility-option {
+    border: 1.5px solid #e1c9fa;
+    padding: 13px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 9px;
+    cursor: pointer;
+}
+
+.visibility-option:has(input:checked) {
+    background: #f4e7ff;
+    border-color: #b77af0;
+}
+
+.visibility-option input {
+    accent-color: #7835c5;
+    width: 17px;
+    height: 17px;
+}
+
+.visibility-option strong {
+    display: block;
+    font-size: 14px;
+}
+
+.visibility-option small {
+    display: block;
+    margin-top: 3px;
+    color: #7c709b;
+    font-size: 11px;
+}
+
+.publish-btn {
+    width: 100%;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    background: linear-gradient(100deg,#963fdb,#7430b7);
+    color: white;
+    font-size: 17px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 8px;
+    box-shadow: 0 5px 15px rgba(125,54,190,.2);
+}
+
+.publish-btn:hover {
+    filter: brightness(1.08);
+}
+
+.secondary-actions {
+    display: flex;
+    gap: 9px;
+    margin-top: 13px;
+}
+
+.secondary-actions button {
+    flex: 1;
+    background: white;
+    border: 1.5px solid #e2c9ff;
+    border-radius: 13px;
+    padding: 12px 5px;
+    color: #54249c;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.secondary-actions button:hover {
+    background: #f5eaff;
+}
+
+.status-message {
+    display: none;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    background: #e7f8ed;
+    color: #267342;
+    font-size: 13px;
+}
+
+.preview-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    background: rgba(25,15,45,.55);
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-box {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 650px;
+    width: 100%;
+    max-height: 85vh;
+    overflow: auto;
+}
+
+.preview-box h2 {
+    font-family: 'Playfair Display',serif;
+    margin-bottom: 15px;
+}
+
+.preview-box p {
+    line-height: 1.8;
+    white-space: pre-wrap;
+    margin-top: 15px;
+}
+
+.close-preview {
+    float: right;
+    border: none;
+    background: #f1e5ff;
+    padding: 9px 13px;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+@media(max-width:1100px) {
+    .top-nav { gap: 0; }
+    .top-nav a { padding: 11px; }
+    .search-box { width: 220px; }
+    .editor-layout { grid-template-columns: minmax(0,1fr) 300px; }
+}
+
+@media(max-width:850px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; display: flex; flex-wrap: wrap; }
+    .sidebar-divider, .category-heading, .sidebar-note, .sidebar .category { display: none; }
+    .editor-layout { grid-template-columns: 1fr; }
+    .settings-card { position: static; }
+    .top-nav, .search-box { display: none; }
+}
+
+@media(max-width:500px) {
+    .topbar { padding: 0 15px; }
+    .page-layout { padding: 15px; }
+    .editor-card, .settings-card { padding: 19px; }
+    .heading h1 { font-size: 37px; }
+    .top-icons { gap: 12px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <a href="index.html" class="logo"><i class="fa-solid fa-feather-pointed"></i> BlogSpace</a>
+
+    <nav class="top-nav">
+        <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="index.html"><i class="fa-solid fa-compass"></i> Explore</a>
+        <a href="create-blog.html" class="active"><i class="fa-solid fa-pen"></i> Write</a>
+        <a href="index.html"><i class="fa-solid fa-users"></i> Community</a>
+    </nav>
+
+    <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search blogs, topics, authors...">
+    </div>
+
+    <div class="top-icons">
+        <a href="dashboard.html"><i class="fa-regular fa-bell"></i></a>
+        <a href="dashboard.html">
+            <img class="avatar" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=100" alt="Profile">
+        </a>
+    </div>
+</header>
+
+<div class="page-layout">
+
+    <aside class="sidebar">
+        <a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+        <a href="index.html"><i class="fa-regular fa-compass"></i> Explore</a>
+        <a href="create-blog.html" class="active"><i class="fa-solid fa-pen"></i> Create Blog</a>
+        <a href="dashboard.html"><i class="fa-regular fa-file-lines"></i> My Blogs</a>
+        <a href="dashboard.html"><i class="fa-regular fa-bookmark"></i> Bookmarks</a>
+        <a href="index.html"><i class="fa-regular fa-heart"></i> Liked Blogs</a>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="category-heading">Categories ✨</div>
+        <a href="index.html" class="category"><i class="fa-solid fa-code"></i> Technology</a>
+        <a href="index.html" class="category"><i class="fa-solid fa-leaf"></i> Lifestyle</a>
+        <a href="index.html" class="category"><i class="fa-solid fa-graduation-cap"></i> Education</a>
+        <a href="index.html" class="category"><i class="fa-solid fa-plane"></i> Travel</a>
+        <a href="index.html" class="category"><i class="fa-solid fa-heart"></i> Health & Wellness</a>
+        <a href="index.html" class="category"><i class="fa-solid fa-bullseye"></i> Productivity</a>
+        <a href="index.html" class="category"><i class="fa-solid fa-grip"></i> More</a>
+
+        <div class="sidebar-note">
+            Write<br>Read<br>Share<br>Repeat ♡
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <div class="heading">
+            <h1>Create a New Blog ✨</h1>
+            <p>Turn your ideas into a story and share them with the BlogSpace community 💜</p>
+        </div>
+
+        <div class="editor-layout">
+
+            <section class="editor-card">
+
+                <div class="status-message" id="statusMessage"></div>
+
+                <form id="blogForm">
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-feather-pointed"></i> Blog Title <span class="required">*</span></label>
+                        <input type="text" id="blogTitle" placeholder="Give your blog a clear and catchy title..." maxlength="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-regular fa-image"></i> Cover Image</label>
+                        <label class="upload-area" for="coverImage">
+                            <div id="uploadText">
+                                <i class="fa-regular fa-image"></i>
+                                <strong>Upload a cover image</strong>
+                                <span>Drag & drop or click to choose (JPG, PNG, WebP)</span>
+                            </div>
+                            <img id="imagePreview" alt="Cover image preview">
+                            <input type="file" id="coverImage" accept="image/png,image/jpeg,image/webp">
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-pen-nib"></i> Blog Content <span class="required">*</span></label>
+
+                        <div class="toolbar">
+                            <select id="formatBlock" aria-label="Text format">
+                                <option value="P">Paragraph</option>
+                                <option value="H2">Heading</option>
+                                <option value="H3">Subheading</option>
+                            </select>
+                            <button type="button" data-command="bold"><b>B</b></button>
+                            <button type="button" data-command="italic"><i>I</i></button>
+                            <button type="button" data-command="underline"><u>U</u></button>
+                            <button type="button" data-command="strikeThrough"><s>S</s></button>
+                            <button type="button" data-command="justifyLeft"><i class="fa-solid fa-align-left"></i></button>
+                            <button type="button" data-command="insertUnorderedList"><i class="fa-solid fa-list-ul"></i></button>
+                            <button type="button" data-command="insertOrderedList"><i class="fa-solid fa-list-ol"></i></button>
+                            <button type="button" data-command="createLink"><i class="fa-solid fa-link"></i></button>
+                            <button type="button" data-command="formatBlock" data-value="BLOCKQUOTE"><i class="fa-solid fa-quote-right"></i></button>
+                        </div>
+
+                        <div id="blogContent" contenteditable="true" data-placeholder="Start writing your blog here..."></div>
+
+                        <div class="editor-footer">
+                            <span>Make your story unforgettable ✨</span>
+                            <span id="wordCount">0 words</span>
+                        </div>
+                    </div>
+
+                </form>
+            </section>
+
+            <aside class="settings-card">
+                <h2><i class="fa-solid fa-gear"></i> Blog Settings</h2>
+
+                <div class="settings-group">
+                    <label><i class="fa-regular fa-folder"></i> Category <span class="required">*</span></label>
+                    <select id="blogCategory" required>
+                        <option value="">Select a category</option>
+                        <option>Technology</option>
+                        <option>Productivity</option>
+                        <option>Lifestyle</option>
+                        <option>Education</option>
+                        <option>Travel</option>
+                        <option>Health & Wellness</option>
+                        <option>Entertainment</option>
+                        <option>Food</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="settings-group">
+                    <label><i class="fa-solid fa-tags"></i> Tags</label>
+                    <input type="text" id="tagInput" placeholder="Add tags (e.g., AI, Travel, Study...)">
+                    <div class="tags-input" id="tagList">
+                        <span class="tag">#Technology</span>
+                        <span class="tag">#Productivity</span>
+                    </div>
+                    <small style="color:#9586ad;font-size:11px;">Press Enter to add a tag.</small>
+                </div>
+
+                <div class="settings-group">
+                    <label><i class="fa-regular fa-eye"></i> Visibility</label>
+
+                    <label class="visibility-option">
+                        <input type="radio" name="visibility" value="Public" checked>
+                        <i class="fa-solid fa-globe"></i>
+                        <span><strong>Public</strong><small>Anyone on BlogSpace can read</small></span>
+                    </label>
+
+                    <label class="visibility-option">
+                        <input type="radio" name="visibility" value="Private">
+                        <i class="fa-solid fa-lock"></i>
+                        <span><strong>Private</strong><small>Only you can view</small></span>
+                    </label>
+                </div>
+
+                <button type="button" class="publish-btn" id="publishBtn">
+                    <i class="fa-regular fa-paper-plane"></i> Publish Blog ✨
+                </button>
+
+                <div class="secondary-actions">
+                    <button type="button" id="draftBtn"><i class="fa-regular fa-floppy-disk"></i> Save as Draft</button>
+                    <button type="button" id="previewBtn"><i class="fa-regular fa-eye"></i> Preview</button>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+</div>
+
+<div class="preview-modal" id="previewModal">
+    <div class="preview-box">
+        <button class="close-preview" id="closePreview">Close ✕</button>
+        <h2 id="previewTitle">Your Blog Title</h2>
+        <small id="previewCategory"></small>
+        <div id="previewImageContainer"></div>
+        <p id="previewContent"></p>
+    </div>
+</div>
+
+<script>
+const titleInput = document.getElementById("blogTitle");
+const categoryInput = document.getElementById("blogCategory");
+const contentEditor = document.getElementById("blogContent");
+const imageInput = document.getElementById("coverImage");
+const statusMessage = document.getElementById("statusMessage");
+const tagInput = document.getElementById("tagInput");
+const tagList = document.getElementById("tagList");
+
+let coverImageData = "";
+let tags = ["Technology", "Productivity"];
+
+function showMessage(message) {
+    statusMessage.textContent = message;
+    statusMessage.style.display = "block";
+}
+
+function updateWordCount() {
+    const text = contentEditor.innerText.trim();
+    const count = text ? text.split(/\s+/).length : 0;
+    document.getElementById("wordCount").textContent = count + (count === 1 ? " word" : " words");
+}
+
+contentEditor.addEventListener("input", updateWordCount);
+
+document.querySelectorAll(".toolbar button").forEach(button => {
+    button.addEventListener("click", () => {
+        const command = button.dataset.command;
+
+        if (command === "createLink") {
+            const url = prompt("Enter the link URL:");
+            if (url) document.execCommand("createLink", false, url);
+        } else if (command === "formatBlock") {
+            document.execCommand("formatBlock", false, button.dataset.value);
+        } else {
+            document.execCommand(command, false, null);
+        }
+
+        contentEditor.focus();
+    });
+});
+
+document.getElementById("formatBlock").addEventListener("change", function() {
+    contentEditor.focus();
+    document.execCommand("formatBlock", false, this.value);
+});
+
+tagInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        const tag = tagInput.value.trim().replace(/^#/, "");
+        if (tag && !tags.includes(tag)) {
+            tags.push(tag);
+            renderTags();
+        }
+        tagInput.value = "";
+    }
+});
+
+function renderTags() {
+    tagList.innerHTML = "";
+    tags.forEach((tag, index) => {
+        const span = document.createElement("span");
+        span.className = "tag";
+        span.textContent = "#" + tag + " ×";
+        span.style.cursor = "pointer";
+        span.title = "Click to remove";
+        span.addEventListener("click", () => {
+            tags.splice(index, 1);
+            renderTags();
+        });
+        tagList.appendChild(span);
+    });
+}
+
+imageInput.addEventListener("change", function() {
+    const file = this.files[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+        alert("Please choose an image smaller than 2 MB.");
+        this.value = "";
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        coverImageData = event.target.result;
+        document.getElementById("imagePreview").src = coverImageData;
+        document.getElementById("imagePreview").style.display = "block";
+        document.getElementById("uploadText").style.display = "none";
+    };
+    reader.readAsDataURL(file);
+});
+
+function getBlogData() {
+    const user = JSON.parse(localStorage.getItem("blogSpaceUser") || "{}");
+
+    return {
+        id: Date.now(),
+        author: user.name || user.email?.split("@")[0] || "Guest Writer",
+        title: titleInput.value.trim(),
+        category: categoryInput.value,
+        description: contentEditor.innerText.trim().slice(0, 180),
+        content: contentEditor.innerHTML,
+        plainContent: contentEditor.innerText,
+        image: coverImageData,
+        tags: tags,
+        visibility: document.querySelector('input[name="visibility"]:checked').value,
+        date: new Date().toLocaleDateString()
+    };
+}
+
+function validateBlog() {
+    if (!titleInput.value.trim()) {
+        alert("Please enter your blog title.");
+        titleInput.focus();
+        return false;
+    }
+
+    if (!categoryInput.value) {
+        alert("Please select a category.");
+        categoryInput.focus();
+        return false;
+    }
+
+    if (!contentEditor.innerText.trim()) {
+        alert("Please write your blog content.");
+        contentEditor.focus();
+        return false;
+    }
+
+    return true;
+}
+
+document.getElementById("publishBtn").addEventListener("click", function() {
+    if (!validateBlog()) return;
+
+    const blog = getBlogData();
+    const posts = JSON.parse(localStorage.getItem("blogSpacePosts") || "[]");
+
+    posts.unshift(blog);
+    localStorage.setItem("blogSpacePosts", JSON.stringify(posts));
+
+    localStorage.removeItem("blogSpaceDraft");
+    showMessage("Your blog has been published successfully! Redirecting to your dashboard...");
+    window.scrollTo({top: 0, behavior: "smooth"});
+
+    setTimeout(() => {
+        window.location.href = "dashboard.html";
+    }, 1400);
+});
+
+document.getElementById("draftBtn").addEventListener("click", function() {
+    const draft = getBlogData();
+    localStorage.setItem("blogSpaceDraft", JSON.stringify(draft));
+    showMessage("Your draft has been saved successfully!");
+});
+
+document.getElementById("previewBtn").addEventListener("click", function() {
+    document.getElementById("previewTitle").textContent = titleInput.value || "Your Blog Title";
+    document.getElementById("previewCategory").textContent = categoryInput.value || "No category selected";
+    document.getElementById("previewContent").textContent = contentEditor.innerText || "Your blog content will appear here.";
+
+    const imageContainer = document.getElementById("previewImageContainer");
+    imageContainer.innerHTML = "";
+    if (coverImageData) {
+        const img = document.createElement("img");
+        img.src = coverImageData;
+        img.style.width = "100%";
+        img.style.borderRadius = "12px";
+        img.style.marginTop = "15px";
+        imageContainer.appendChild(img);
+    }
+
+    document.getElementById("previewModal").style.display = "flex";
+});
+
+document.getElementById("closePreview").addEventListener("click", function() {
+    document.getElementById("previewModal").style.display = "none";
+});
+
+document.getElementById("previewModal").addEventListener("click", function(event) {
+    if (event.target === this) this.style.display = "none";
+});
+
+// Restore a saved draft when the page is reopened.
+const savedDraft = JSON.parse(localStorage.getItem("blogSpaceDraft") || "null");
+
+if (savedDraft) {
+    titleInput.value = savedDraft.title || "";
+    categoryInput.value = savedDraft.category || "";
+    contentEditor.innerHTML = savedDraft.content || "";
+    coverImageData = savedDraft.image || "";
+    tags = savedDraft.tags || [];
+
+    if (coverImageData) {
+        document.getElementById("imagePreview").src = coverImageData;
+        document.getElementById("imagePreview").style.display = "block";
+        document.getElementById("uploadText").style.display = "none";
+    }
+
+    renderTags();
+    updateWordCount();
+}
+</script>
+
+</body>
+</html>

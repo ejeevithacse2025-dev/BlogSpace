@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogSpace | Stories Worth Sharing</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- NAVIGATION BAR -->
+<header class="navbar">
+
+    <div class="logo">
+        <i class="fa-solid fa-feather-pointed"></i>
+        <span>BlogSpace</span>
+    </div>
+
+    <nav class="nav-links">
+        <a href="#" class="active">Home</a>
+        <a href="#explore">Explore</a>
+        <a href="#write">Write</a>
+        <a href="#community">Community</a>
+    </nav>
+
+    <div class="nav-right">
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search blogs, topics, or authors...">
+        </div>
+
+        <i class="fa-regular fa-bell notification"></i>
+
+        <div class="profile">
+            <i class="fa-solid fa-user"></i>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="main-layout">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="side-menu">
+            <a href="#" class="selected">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+
+            <a href="#following">
+                <i class="fa-solid fa-users"></i> Following
+            </a>
+
+            <a href="#bookmarks">
+                <i class="fa-regular fa-bookmark"></i> Bookmarks
+            </a>
+
+            <a href="#myblogs">
+                <i class="fa-regular fa-file-lines"></i> My Blogs
+            </a>
+        </div>
+
+        <div class="categories">
+            <h3>Categories</h3>
+
+            <a href="#"><i class="fa-solid fa-code"></i> Technology</a>
+            <a href="#"><i class="fa-solid fa-bullseye"></i> Productivity</a>
+            <a href="#"><i class="fa-solid fa-leaf"></i> Lifestyle</a>
+            <a href="#"><i class="fa-solid fa-plane"></i> Travel</a>
+            <a href="#"><i class="fa-regular fa-heart"></i> Health & Wellness</a>
+            <a href="#"><i class="fa-solid fa-graduation-cap"></i> Education</a>
+            <a href="#"><i class="fa-solid fa-pen"></i> Creative Writing</a>
+            <a href="#"><i class="fa-solid fa-grip"></i> More Topics</a>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+
+            <div class="hero-content">
+                <h1>Share Your<br>Stories with the World ✨</h1>
+
+                <p>
+                    A community space for readers, writers, and curious minds.
+                    Read, write, and discover blogs on topics you love.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#write" class="primary-btn">
+                        <i class="fa-solid fa-pen"></i> Write a Blog
+                    </a>
+
+                    <a href="#explore" class="outline-btn">
+                        <i class="fa-regular fa-compass"></i> Explore Blogs
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- FEATURED BLOGS -->
+        <section class="featured-section" id="explore">
+
+            <div class="section-heading">
+                <h2><i class="fa-solid fa-star"></i> Featured Blogs</h2>
+                <a href="#">View All <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="featured-grid" id="blogContainer">
+
+                <!-- BLOG 1 -->
+                <article class="blog-card">
+
+                    <div class="blog-image image-one">
+                        <span>Productivity</span>
+                    </div>
+
+                    <div class="blog-info">
+                        <h3>How I Stay Productive as a Student</h3>
+
+                        <p>Simple habits and tools that help me manage my time, stay focused, and achieve my goals.</p>
+
+                        <div class="blog-footer">
+                            <div class="author">
+                                <div class="author-avatar">J</div>
+                                <div>
+                                    <strong>Jeevitha E.</strong>
+                                    <small>Nov 5, 2026 · 5 min read</small>
+                                </div>
+                            </div>
+
+                            <button class="like-btn">
+                                <i class="fa-regular fa-heart"></i> 128
+                            </button>
+                        </div>
+                    </div>
+
+                </article>
+
+
+                <!-- BLOG 2 -->
+                <article class="blog-card">
+
+                    <div class="blog-image image-two">
+                        <span>Travel</span>
+                    </div>
+
+                    <div class="blog-info">
+                        <h3>A Solo Trip That Changed Me</h3>
+
+                        <p>My first solo trip, the lessons I learned, and why you should try it at least once.</p>
+
+                        <div class="blog-footer">
+                            <div class="author">
+                                <div class="author-avatar">M</div>
+                                <div>
+                                    <strong>Madhu R.</strong>
+                                    <small>Nov 3, 2026 · 7 min read</small>
+                                </div>
+                            </div>
+
+                            <button class="like-btn">
+                                <i class="fa-regular fa-heart"></i> 241
+                            </button>
+                        </div>
+                    </div>
+
+                </article>
+
+
+                <!-- BLOG 3 -->
+                <article class="blog-card">
+
+                    <div class="blog-image image-three">
+                        <span>Education</span>
+                    </div>
+
+                    <div class="blog-info">
+                        <h3>My College Learning Journey So Far</h3>
+
+                        <p>From a first-year beginner to where I am now. Here's what I've learned.</p>
+
+                        <div class="blog-footer">
+                            <div class="author">
+                                <div class="author-avatar">D</div>
+                                <div>
+                                    <strong>Devi S.</strong>
+                                    <small>Nov 1, 2026 · 6 min read</small>
+                                </div>
+                            </div>
+
+                            <button class="like-btn">
+                                <i class="fa-regular fa-heart"></i> 176
+                            </button>
+                        </div>
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- LATEST COMMUNITY BLOGS -->
+        <section class="latest-section" id="community">
+
+            <div class="section-heading">
+                <h2><i class="fa-solid fa-users"></i> Latest from the Community</h2>
+                <a href="#">View More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="latest-card">
+
+                <div class="latest-author">
+                    <div class="author-avatar">K</div>
+                    <div>
+                        <h3>Why Small Habits Make a Big Difference</h3>
+                        <p>Kavya N. · 2 hours ago · 4 min read</p>
+                    </div>
+                </div>
+
+                <div class="latest-image"></div>
+
+                <button class="like-btn">
+                    <i class="fa-regular fa-heart"></i> 42
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="right-sidebar">
+
+        <!-- WRITE CARD -->
+        <div class="write-card" id="write">
+
+            <div class="write-heading">
+                <i class="fa-solid fa-pen-to-square"></i>
+
+                <div>
+                    <h3>Ready to Share a Story?</h3>
+                    <p>Write, publish, and get feedback from a supportive community.</p>
+                </div>
+            </div>
+
+            <a href="#createBlog" class="write-btn">
+                <i class="fa-solid fa-plus"></i> Write Your Blog
+            </a>
+
+        </div>
+
+
+        <!-- TRENDING TOPICS -->
+        <div class="trending-card">
+
+            <h3>Trending Topics 🔥</h3>
+
+            <div class="tags">
+                <span># Productivity</span>
+                <span># CollegeLife</span>
+                <span># AI</span>
+                <span># WebDevelopment</span>
+                <span># Travel</span>
+                <span># SelfCare</span>
+            </div>
+
+        </div>
+
+
+        <!-- COMMUNITY STATISTICS -->
+        <div class="community-card">
+
+            <h3><i class="fa-solid fa-users"></i> BlogSpace Community</h3>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <i class="fa-solid fa-star"></i>
+                    <h2>2,450+</h2>
+                    <p>Writers</p>
+                </div>
+
+                <div class="stat">
+                    <i class="fa-solid fa-book-open"></i>
+                    <h2>12K+</h2>
+                    <p>Blogs</p>
+                </div>
+
+                <div class="stat">
+                    <i class="fa-solid fa-heart"></i>
+                    <h2>48K+</h2>
+                    <p>Readers</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

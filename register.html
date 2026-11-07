@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BlogSpace | Create Account</title>
+
+    <link rel="stylesheet" href="auth.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="decoration leaf-top">
+    <i class="fa-solid fa-leaf"></i>
+</div>
+
+<div class="decoration leaf-bottom">
+    <i class="fa-solid fa-leaf"></i>
+</div>
+
+<div class="decoration leaf-right">
+    <i class="fa-solid fa-leaf"></i>
+</div>
+
+
+<!-- HEADER -->
+
+<header class="brand-header">
+
+    <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-feather-pointed"></i>
+        <span>BlogSpace</span>
+    </a>
+
+    <p>Write · Read · Share · Connect ✨</p>
+
+</header>
+
+
+<!-- REGISTRATION CARD -->
+
+<main class="login-card">
+
+    <!-- LEFT PANEL -->
+
+    <section class="illustration-panel">
+
+        <div class="story-image">
+
+            <div class="image-overlay">
+                <span>✦</span>
+                <h2>Your Story<br>Starts Here ♡</h2>
+            </div>
+
+        </div>
+
+
+        <div class="features">
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+
+                <div>
+                    <h3>Create</h3>
+                    <p>Start your writing journey</p>
+                </div>
+            </div>
+
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <div>
+                    <h3>Explore</h3>
+                    <p>Discover amazing stories</p>
+                </div>
+            </div>
+
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+                    <h3>Community</h3>
+                    <p>Connect with fellow writers</p>
+                </div>
+            </div>
+
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div>
+                    <h3>Inspire</h3>
+                    <p>Share ideas with the world</p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT PANEL -->
+
+    <section class="login-panel">
+
+        <div class="auth-tabs">
+
+            <a href="login.html" class="tab">
+                Login
+            </a>
+
+            <a href="register.html" class="tab active">
+                Sign Up
+            </a>
+
+        </div>
+
+
+        <div class="welcome-heading">
+
+            <h1>Create Account! 💜</h1>
+
+            <p>Join our community of storytellers</p>
+
+        </div>
+
+
+        <!-- REGISTRATION FORM -->
+
+        <form id="registerForm">
+
+            <div class="input-box">
+                <i class="fa-regular fa-user"></i>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
+
+
+            <div class="input-box">
+                <i class="fa-regular fa-envelope"></i>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+
+            <div class="input-box">
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create a password"
+                    required
+                    minlength="6"
+                >
+
+                <button type="button" class="toggle-password" data-target="password">
+                    <i class="fa-regular fa-eye"></i>
+                </button>
+            </div>
+
+
+            <div class="input-box">
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                    required
+                    minlength="6"
+                >
+
+                <button type="button" class="toggle-password" data-target="confirmPassword">
+                    <i class="fa-regular fa-eye"></i>
+                </button>
+            </div>
+
+
+            <div class="terms-check">
+
+                <input type="checkbox" id="agreeTerms" required>
+
+                <label for="agreeTerms">
+                    I agree to the
+                    <a href="#">Terms of Service</a>
+                    and
+                    <a href="#">Privacy Policy</a>.
+                </label>
+
+            </div>
+
+
+            <button type="submit" class="login-button">
+                Create Account
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <p id="registerMessage"></p>
+
+        </form>
+
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+
+        <div class="social-buttons">
+
+            <button type="button" id="googleRegister">
+                <i class="fa-brands fa-google google-icon"></i>
+                Google
+            </button>
+
+            <button type="button" id="githubRegister">
+                <i class="fa-brands fa-github"></i>
+                GitHub
+            </button>
+
+        </div>
+
+
+        <p class="bottom-text">
+            Already have an account?
+            <a href="login.html">Login here</a>
+        </p>
+
+    </section>
+
+</main>
+
+
+<footer class="page-footer">
+    Made with 💜 for every storyteller.
+</footer>
+
+
+<script>
+
+// SHOW AND HIDE PASSWORD
+
+document.querySelectorAll(".toggle-password").forEach(button => {
+
+    button.addEventListener("click", function() {
+
+        const target = document.getElementById(this.dataset.target);
+
+        if(target.type === "password") {
+
+            target.type = "text";
+
+            this.innerHTML =
+                '<i class="fa-regular fa-eye-slash"></i>';
+
+        } else {
+
+            target.type = "password";
+
+            this.innerHTML =
+                '<i class="fa-regular fa-eye"></i>';
+
+        }
+
+    });
+
+});
+
+
+// REGISTRATION FORM
+
+document.getElementById("registerForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("fullName").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    const agree = document.getElementById("agreeTerms").checked;
+
+    const message = document.getElementById("registerMessage");
+
+    if(name.length < 2) {
+        message.textContent = "Please enter your full name.";
+        message.style.color = "#e34d65";
+        return;
+    }
+
+    if(password.length < 6) {
+        message.textContent = "Password must contain at least 6 characters.";
+        message.style.color = "#e34d65";
+        return;
+    }
+
+    if(password !== confirmPassword) {
+        message.textContent = "Passwords do not match!";
+        message.style.color = "#e34d65";
+        return;
+    }
+
+    if(!agree) {
+        message.textContent = "Please accept the terms and conditions.";
+        message.style.color = "#e34d65";
+        return;
+    }
+
+    // Frontend demonstration only.
+    // Never store real passwords in LocalStorage.
+
+    const user = {
+        name: name,
+        email: email
+    };
+
+    localStorage.setItem("blogSpaceUser", JSON.stringify(user));
+
+    message.textContent = "Account details validated successfully! Welcome 💜";
+    message.style.color = "#239b68";
+
+    setTimeout(function() {
+        window.location.href = "index.html";
+    }, 1500);
+
+});
+
+
+// SOCIAL LOGIN PLACEHOLDERS
+
+document.getElementById("googleRegister").addEventListener("click", function() {
+    alert("Google authentication will be connected later.");
+});
+
+document.getElementById("githubRegister").addEventListener("click", function() {
+    alert("GitHub authentication will be connected later.");
+});
+
+</script>
+
+</body>
+</html>

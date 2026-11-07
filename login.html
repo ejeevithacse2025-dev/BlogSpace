@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogSpace | Login</title>
+
+    <link rel="stylesheet" href="auth.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="decoration leaf-top">
+    <i class="fa-solid fa-leaf"></i>
+</div>
+
+<div class="decoration leaf-bottom">
+    <i class="fa-solid fa-leaf"></i>
+</div>
+
+<div class="decoration leaf-right">
+    <i class="fa-solid fa-leaf"></i>
+</div>
+
+
+<!-- HEADER -->
+
+<header class="brand-header">
+
+    <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-feather-pointed"></i>
+        <span>BlogSpace</span>
+    </a>
+
+    <p>Write · Read · Share · Connect ✨</p>
+
+</header>
+
+
+<!-- MAIN LOGIN CARD -->
+
+<main class="login-card">
+
+    <!-- LEFT PANEL -->
+
+    <section class="illustration-panel">
+
+        <div class="story-image">
+
+            <div class="image-overlay">
+                <span>✦</span>
+                <h2>Share<br>Your<br>Stories ♡</h2>
+            </div>
+
+        </div>
+
+
+        <div class="features">
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-feather-pointed"></i>
+                </div>
+
+                <div>
+                    <h3>Write</h3>
+                    <p>Publish your thoughts</p>
+                </div>
+            </div>
+
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <div>
+                    <h3>Read</h3>
+                    <p>Discover new perspectives</p>
+                </div>
+            </div>
+
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+                    <h3>Connect</h3>
+                    <p>Meet fellow writers</p>
+                </div>
+            </div>
+
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fa-regular fa-bookmark"></i>
+                </div>
+
+                <div>
+                    <h3>Save</h3>
+                    <p>Bookmark what you love</p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT PANEL -->
+
+    <section class="login-panel">
+
+        <!-- LOGIN / SIGNUP TABS -->
+
+        <div class="auth-tabs">
+
+            <a href="login.html" class="tab active">
+                Login
+            </a>
+
+            <a href="register.html" class="tab">
+                Sign Up
+            </a>
+
+        </div>
+
+
+        <div class="welcome-heading">
+
+            <h1>Welcome Back! <span>💜</span></h1>
+
+            <p>Continue your blogging journey</p>
+
+        </div>
+
+
+        <!-- LOGIN FORM -->
+
+        <form id="loginForm">
+
+            <div class="input-box">
+                <i class="fa-regular fa-envelope"></i>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+
+            <div class="input-box">
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <button type="button" id="togglePassword">
+                    <i class="fa-regular fa-eye"></i>
+                </button>
+            </div>
+
+
+            <div class="form-options">
+
+                <label class="remember">
+                    <input type="checkbox" id="remember">
+                    <span>Remember me</span>
+                </label>
+
+                <a href="#" id="forgotPassword">
+                    Forgot password?
+                </a>
+
+            </div>
+
+
+            <button type="submit" class="login-button">
+                Login <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <p id="loginMessage"></p>
+
+        </form>
+
+
+        <!-- DIVIDER -->
+
+        <div class="divider">
+            <span>Or login with</span>
+        </div>
+
+
+        <!-- SOCIAL BUTTONS -->
+
+        <div class="social-buttons">
+
+            <button type="button" id="googleLogin">
+                <i class="fa-brands fa-google google-icon"></i>
+                Google
+            </button>
+
+            <button type="button" id="githubLogin">
+                <i class="fa-brands fa-github"></i>
+                GitHub
+            </button>
+
+        </div>
+
+        <p class="bottom-text">
+            New to BlogSpace?
+            <a href="register.html">Create an account</a>
+        </p>
+
+    </section>
+
+</main>
+
+
+<footer class="page-footer">
+    Made with 💜 for every storyteller.
+</footer>
+
+
+<script>
+
+// SHOW AND HIDE PASSWORD
+
+const password = document.getElementById("password");
+const toggle = document.getElementById("togglePassword");
+
+toggle.addEventListener("click", function() {
+
+    if(password.type === "password") {
+        password.type = "text";
+        toggle.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
+    } else {
+        password.type = "password";
+        toggle.innerHTML = '<i class="fa-regular fa-eye"></i>';
+    }
+
+});
+
+
+// LOGIN FORM
+
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const pass = password.value;
+    const message = document.getElementById("loginMessage");
+
+    if(pass.length < 6) {
+        message.textContent = "Password must contain at least 6 characters.";
+        message.style.color = "#e34d65";
+        return;
+    }
+
+    const user = { email: email };
+
+    localStorage.setItem("blogSpaceUser", JSON.stringify(user));
+
+    message.textContent = "Welcome to BlogSpace! 💜";
+    message.style.color = "#239b68";
+
+    setTimeout(function() {
+        window.location.href = "index.html";
+    }, 1200);
+
+});
+
+
+// FORGOT PASSWORD
+
+document.getElementById("forgotPassword").addEventListener("click", function(e) {
+    e.preventDefault();
+    alert("Password recovery will be available after backend authentication is added.");
+});
+
+
+// SOCIAL LOGIN PLACEHOLDERS
+
+document.getElementById("googleLogin").addEventListener("click", function() {
+    alert("Google authentication will be connected later.");
+});
+
+document.getElementById("githubLogin").addEventListener("click", function() {
+    alert("GitHub authentication will be connected later.");
+});
+
+</script>
+
+</body>
+</html>
