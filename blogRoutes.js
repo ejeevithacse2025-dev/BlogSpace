@@ -5,13 +5,13 @@ const Blog = require("../models/Blog");
 
 const router = express.Router();
 
-// VERIFY LOGIN TOKEN
-function verifyToken(req, res, next) {
+// Authentication middleware
+const verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return res.status(401).json({
-            message: "Please log in to continue."
+            message: "Access denied. Please login."
         });
     }
 
@@ -19,17 +19,16 @@ function verifyToken(req, res, next) {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.userId = decoded.userId;
+        req.userId = decoded.id || decoded.userId;
         next();
-
     } catch (error) {
         return res.status(401).json({
             message: "Invalid or expired token."
         });
     }
-}
+};
 
-// CREATE BLOG API
+// CREATE A NEW BLOG
 router.post("/create", verifyToken, async (req, res) => {
     try {
         const {
@@ -44,7 +43,7 @@ router.post("/create", verifyToken, async (req, res) => {
 
         if (!title || !description || !content || !category) {
             return res.status(400).json({
-                message: "Please provide all required blog details."
+                message: "Please fill in all required fields."
             });
         }
 
@@ -67,15 +66,61 @@ router.post("/create", verifyToken, async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Create blog error:", error.message);
-
         res.status(500).json({
-            message: "Server error while creating blog."
+            message: "Failed to create blog.",
+            error: error.message
         });
     }
 });
 
-// GET MY BLOGS API
+// GET ALL PUBLIC BLOGS
+router.get("/all", async (req, res) => {
+    try {
+        const blogs = await Blog.find({ visibility: "Public" })
+            .populate("author", "name")
+            .sort({ createdAt: -1 });
+
+        res.status(200).json({
+            message: "All public blogs fetched successfully!",
+            blogs
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to fetch blogs.",
+            error: error.message
+        });
+    }
+});
+
+// GET INDIVIDUAL BLOG DETAILS
+router.get("/:id", async (req, res) => {
+    try {
+        const blog = await Blog.findOne({
+            _id: req.params.id,
+            visibility: "Public"
+        }).populate("author", "name");
+
+        if (!blog) {
+            return res.status(404).json({
+                message: "Blog not found."
+            });
+        }
+
+        res.status(200).json({
+            message: "Blog details fetched successfully!",
+            blog
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to fetch blog details.",
+            error: error.message
+        });
+    }
+});
+
+// GET MY BLOGS
 router.get("/my-blogs", verifyToken, async (req, res) => {
     try {
         const blogs = await Blog.find({
@@ -83,15 +128,14 @@ router.get("/my-blogs", verifyToken, async (req, res) => {
         }).sort({ createdAt: -1 });
 
         res.status(200).json({
-            message: "Blogs fetched successfully!",
+            message: "Your blogs fetched successfully!",
             blogs
         });
 
     } catch (error) {
-        console.error("Fetch blogs error:", error.message);
-
         res.status(500).json({
-            message: "Server error while fetching blogs."
+            message: "Failed to fetch your blogs.",
+            error: error.message
         });
     }
 });

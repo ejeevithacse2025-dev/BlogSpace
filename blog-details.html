@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Details | BlogSpace</title>
+    <link rel="stylesheet" href="blog-details.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">BlogSpace<span>.</span></a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="blogs.html">Explore</a>
+            <a href="dashboard.html">Dashboard</a>
+        </div>
+
+        <a href="create-blog.html" class="write-btn">Write a Blog +</a>
+    </nav>
+
+    <main class="article-container">
+
+        <a href="blogs.html" class="back-link">← Back to all blogs</a>
+
+        <div id="loading" class="loading">
+            Loading your story...
+        </div>
+
+        <article id="article" hidden>
+
+            <div class="article-header">
+                <span id="blogCategory" class="category"></span>
+
+                <h1 id="blogTitle"></h1>
+
+                <div class="article-meta">
+                    <span id="blogAuthor"></span>
+                    <span>•</span>
+                    <span id="blogDate"></span>
+                </div>
+            </div>
+
+            <img id="blogImage" class="article-image" alt="Blog cover">
+
+            <div id="blogContent" class="article-content"></div>
+
+            <div id="blogTags" class="article-tags"></div>
+
+        </article>
+
+        <div id="errorMessage" class="error-message" hidden>
+            <h2>Blog not found!</h2>
+            <p>This blog may have been removed or is unavailable.</p>
+            <a href="blogs.html">Explore other blogs</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Made with 💜 by BlogSpace. Share your world.</p>
+    </footer>
+
+    <script src="blog-details.js"></script>
+
+</body>
+</html>

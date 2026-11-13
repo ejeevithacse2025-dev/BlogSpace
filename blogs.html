@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Blogs | BlogSpace</title>
+    <link rel="stylesheet" href="blogs.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">BlogSpace<span>.</span></a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="blogs.html" class="active">Explore</a>
+            <a href="dashboard.html">Dashboard</a>
+        </div>
+
+        <a href="create-blog.html" class="write-btn">Write a Blog +</a>
+    </nav>
+
+    <header class="hero">
+        <p class="eyebrow">THE BLOGSPACE COMMUNITY</p>
+        <h1>Ideas worth <span>sharing.</span></h1>
+        <p>Discover stories, thoughts and inspiration from our community.</p>
+    </header>
+
+    <main class="container">
+
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">FRESH PERSPECTIVES</p>
+                <h2>Explore all blogs</h2>
+            </div>
+            <span id="blogCount">Loading blogs...</span>
+        </div>
+
+        <div id="blogContainer" class="blog-grid">
+            <p class="loading">Loading amazing stories...</p>
+        </div>
+
+        <div id="emptyMessage" class="empty-message" hidden>
+            <h3>No blogs published yet!</h3>
+            <p>Be the first to share your story.</p>
+            <a href="create-blog.html">Write your first blog</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Made with 💜 by BlogSpace. Share your world.</p>
+    </footer>
+
+    <script src="blogs.js"></script>
+</body>
+</html>
