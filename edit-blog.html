@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Blog | BlogSpace</title>
+    <link rel="stylesheet" href="edit-blog.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">BlogSpace<span>.</span></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="blogs.html">Explore</a>
+            <a href="dashboard.html">Dashboard</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+
+        <div class="form-header">
+            <p class="eyebrow">YOUR STORY, YOUR WAY</p>
+            <h1>Edit your blog</h1>
+            <p>Make changes and share your updated story.</p>
+        </div>
+
+        <form id="editBlogForm">
+
+            <label for="title">Blog Title</label>
+            <input type="text" id="title" maxlength="100" required>
+
+            <label for="description">Short Description</label>
+            <textarea id="description" maxlength="300" rows="3" required></textarea>
+
+            <label for="category">Category</label>
+            <input type="text" id="category" required>
+
+            <label for="content">Blog Content</label>
+            <textarea id="content" rows="12" required></textarea>
+
+            <label for="tags">Tags</label>
+            <input type="text" id="tags" placeholder="Technology, Lifestyle, Travel">
+
+            <label for="visibility">Visibility</label>
+            <select id="visibility">
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+
+            <div id="statusMessage" class="status-message"></div>
+
+            <div class="form-actions">
+                <button type="submit" id="saveBtn">Save Changes</button>
+                <a href="dashboard.html" class="cancel-btn">Cancel</a>
+            </div>
+
+        </form>
+    </main>
+
+    <script src="edit-blog.js"></script>
+</body>
+</html>

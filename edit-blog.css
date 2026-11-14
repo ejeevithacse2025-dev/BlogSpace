@@ -1,0 +1,164 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #faf9ff;
+    color: #28213c;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 8%;
+    background: white;
+    border-bottom: 1px solid #eeeaf7;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #28213c;
+    text-decoration: none;
+}
+
+.logo span {
+    color: #8b5cf6;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #777;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 750px;
+    margin: 50px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 5px 25px rgba(50, 30, 80, 0.05);
+}
+
+.back-link {
+    color: #8b5cf6;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.form-header {
+    margin: 35px 0;
+}
+
+.eyebrow {
+    color: #8b5cf6;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.form-header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.form-header p:last-child {
+    color: #888;
+}
+
+form label {
+    display: block;
+    margin: 22px 0 9px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e5e0ef;
+    border-radius: 9px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    background: #fff;
+    color: #28213c;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    border-color: #8b5cf6;
+}
+
+form textarea {
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 28px;
+}
+
+#saveBtn,
+.cancel-btn {
+    padding: 13px 23px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+#saveBtn {
+    background: #8b5cf6;
+    color: white;
+}
+
+#saveBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.cancel-btn {
+    background: #f0ecf8;
+    color: #514b60;
+}
+
+.status-message {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #8b5cf6;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 20px;
+        padding: 22px;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+}
