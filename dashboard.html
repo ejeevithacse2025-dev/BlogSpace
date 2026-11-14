@@ -1,9 +1,11 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>BlogSpace | Dashboard</title>
 
     <link rel="stylesheet" href="dashboard.css">
@@ -15,401 +17,274 @@
 
 <body>
 
-<!-- TOP NAVIGATION -->
+    <!-- TOP NAVIGATION -->
+    <header class="topbar">
 
-<header class="topbar">
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-feather-pointed"></i>
+            BlogSpace
+        </a>
 
-    <a href="index.html" class="logo">
-        <i class="fa-solid fa-feather-pointed"></i>
-        BlogSpace
-    </a>
+        <div class="topbar-right">
 
-    <div class="topbar-right">
-
-        <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="dashboardSearch" placeholder="Search your blogs...">
-        </div>
-
-        <button class="notification-btn" id="notifications">
-            <i class="fa-regular fa-bell"></i>
-            <span></span>
-        </button>
-
-        <div class="profile-menu">
-            <div class="profile-avatar" id="profileAvatar">J</div>
-            <div class="profile-details">
-                <strong id="profileName">Jeevitha</strong>
-                <small>Writer</small>
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="dashboardSearch" placeholder="Search your blogs...">
             </div>
+
+            <button class="notification-btn" id="notifications">
+                <i class="fa-regular fa-bell"></i>
+                <span></span>
+            </button>
+
+            <div class="profile-menu">
+                <div class="profile-avatar" id="profileAvatar">J</div>
+                <div class="profile-details">
+                    <strong id="profileName">Jeevitha</strong>
+                    <small>Writer</small>
+                </div>
+            </div>
+
         </div>
+
+    </header>
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-heading">MENU</div>
+
+            <a href="dashboard.html" class="side-link active">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+            <a href="#myBlogs" class="side-link">
+                <i class="fa-solid fa-file-lines"></i>
+                My Blogs
+            </a>
+
+            <a href="#analytics" class="side-link">
+                <i class="fa-solid fa-chart-line"></i>
+                Analytics
+            </a>
+
+            <a href="#drafts" class="side-link">
+                <i class="fa-regular fa-folder-open"></i>
+                Drafts
+            </a>
+
+            <a href="index.html#bookmarks" class="side-link">
+                <i class="fa-regular fa-bookmark"></i>
+                Bookmarks
+            </a>
+
+            <div class="sidebar-heading second-heading">ACCOUNT</div>
+
+            <a href="#profile" class="side-link">
+                <i class="fa-regular fa-user"></i>
+                My Profile
+            </a>
+
+            <a href="#" class="side-link" id="settingsButton">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+            <a href="index.html" class="side-link">
+                <i class="fa-solid fa-compass"></i>
+                Explore Blogs
+            </a>
+
+            <div class="sidebar-bottom">
+
+                <div class="help-card">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <h3>Need Help?</h3>
+                    <p>We're here to help you share your stories.</p>
+                    <a href="mailto:support@example.com">Contact Support</a>
+                </div>
+
+                <button class="logout-btn" id="logoutButton">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    Log Out
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- WELCOME -->
+            <section class="welcome-banner">
+
+                <div>
+                    <span class="welcome-tag">YOUR CREATIVE SPACE ✨</span>
+
+                    <h1>
+                        Welcome back,
+                        <span id="welcomeName">Jeevitha</span>! 💜
+                    </h1>
+
+                    <p>
+                        Every great story begins with an idea.
+                        Ready to share something amazing today?
+                    </p>
+
+                    <a href="create-blog.html" class="create-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        Create New Blog
+                    </a>
+                </div>
+
+                <div class="welcome-art">
+                    <i class="fa-solid fa-feather-pointed"></i>
+                    <span>Write your story</span>
+                </div>
+
+            </section>
+
+            <!-- STATISTICS -->
+            <section class="stats-grid" id="analytics">
+
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+
+                    <p>Total Blogs</p>
+                    <h2 id="totalBlogs">0</h2>
+                    <small>Your published stories</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon pink">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+
+                    <p>Total Views</p>
+                    <h2 id="totalViews">0</h2>
+                    <small>Across your stories</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <p>Total Likes</p>
+                    <h2 id="totalLikes">0</h2>
+                    <small>Appreciation from readers</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <p>Followers</p>
+                    <h2>128</h2>
+                    <small>Your growing community</small>
+                </div>
+
+            </section>
+
+            <!-- MY BLOGS -->
+            <section class="blogs-section" id="myBlogs">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>My Published Blogs</h2>
+                        <p>Your stories, all in one place.</p>
+                    </div>
+
+                    <a href="index.html">
+                        Explore Community
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+                <div class="blog-list" id="myBlogList">
+
+                    <div class="empty-state">
+                        <i class="fa-regular fa-file-lines"></i>
+                        <h3>Loading your blogs...</h3>
+                        <p>Please wait while we fetch your stories.</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- RECENT ACTIVITY -->
+            <section class="activity-section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Recent Activity</h2>
+                        <p>Your latest blogging activity.</p>
+                    </div>
+                </div>
+
+                <div class="activity-card">
+
+                    <div class="activity-icon">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                    </div>
+
+                    <div>
+                        <h3>Welcome to BlogSpace!</h3>
+                        <p>Your creative journey starts here. Create your first blog today.</p>
+                        <small>Just now</small>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- QUICK ACTIONS -->
+            <section class="drafts-section" id="drafts">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Quick Actions</h2>
+                        <p>Everything you need to get started.</p>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+
+                    <a href="create-blog.html">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span>Write a Blog</span>
+                    </a>
+
+                    <a href="index.html">
+                        <i class="fa-solid fa-compass"></i>
+                        <span>Explore Blogs</span>
+                    </a>
+
+                    <a href="#analytics">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>View Analytics</span>
+                    </a>
+
+                </div>
+
+            </section>
+
+        </main>
 
     </div>
 
-</header>
-
-
-<div class="dashboard-layout">
-
-    <!-- SIDEBAR -->
-
-    <aside class="sidebar">
-
-        <div class="sidebar-heading">MENU</div>
-
-        <a href="dashboard.html" class="side-link active">
-            <i class="fa-solid fa-house"></i>
-            Dashboard
-        </a>
-
-        <a href="#myBlogs" class="side-link">
-            <i class="fa-solid fa-file-lines"></i>
-            My Blogs
-        </a>
-
-        <a href="#analytics" class="side-link">
-            <i class="fa-solid fa-chart-line"></i>
-            Analytics
-        </a>
-
-        <a href="#drafts" class="side-link">
-            <i class="fa-regular fa-folder-open"></i>
-            Drafts
-        </a>
-
-        <a href="index.html#bookmarks" class="side-link">
-            <i class="fa-regular fa-bookmark"></i>
-            Bookmarks
-        </a>
-
-        <div class="sidebar-heading second-heading">ACCOUNT</div>
-
-        <a href="#profile" class="side-link">
-            <i class="fa-regular fa-user"></i>
-            My Profile
-        </a>
-
-        <a href="#" class="side-link" id="settingsButton">
-            <i class="fa-solid fa-gear"></i>
-            Settings
-        </a>
-
-        <a href="index.html" class="side-link">
-            <i class="fa-solid fa-compass"></i>
-            Explore Blogs
-        </a>
-
-        <div class="sidebar-bottom">
-            <div class="help-card">
-                <i class="fa-solid fa-circle-question"></i>
-                <h3>Need Help?</h3>
-                <p>We're here to help you share your stories.</p>
-                <a href="mailto:support@example.com">Contact Support</a>
-            </div>
-
-            <button class="logout-btn" id="logoutButton">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                Log Out
-            </button>
-        </div>
-
-    </aside>
-
-
-    <!-- MAIN CONTENT -->
-
-    <main class="main-content">
-
-        <!-- WELCOME -->
-
-        <section class="welcome-banner">
-
-            <div>
-                <span class="welcome-tag">YOUR CREATIVE SPACE ✨</span>
-
-                <h1>Welcome back, <span id="welcomeName">Jeevitha</span>! 💜</h1>
-
-                <p>
-                    Every great story begins with an idea.
-                    Ready to share something amazing today?
-                </p>
-
-                <a href="create-blog.html" class="create-btn">
-                    <i class="fa-solid fa-plus"></i>
-                    Create New Blog
-                </a>
-            </div>
-
-            <div class="welcome-art">
-                <i class="fa-solid fa-feather-pointed"></i>
-                <span>Write your story</span>
-            </div>
-
-        </section>
-
-
-        <!-- STATISTICS -->
-
-        <section class="stats-grid" id="analytics">
-
-            <div class="stat-card">
-                <div class="stat-icon purple">
-                    <i class="fa-solid fa-file-lines"></i>
-                </div>
-
-                <p>Total Blogs</p>
-                <h2 id="totalBlogs">0</h2>
-                <small>Your published stories</small>
-            </div>
-
-
-            <div class="stat-card">
-                <div class="stat-icon pink">
-                    <i class="fa-solid fa-eye"></i>
-                </div>
-
-                <p>Total Views</p>
-                <h2 id="totalViews">0</h2>
-                <small>Across your stories</small>
-            </div>
-
-
-            <div class="stat-card">
-                <div class="stat-icon orange">
-                    <i class="fa-solid fa-heart"></i>
-                </div>
-
-                <p>Total Likes</p>
-                <h2 id="totalLikes">0</h2>
-                <small>Appreciation from readers</small>
-            </div>
-
-
-            <div class="stat-card">
-                <div class="stat-icon green">
-                    <i class="fa-solid fa-users"></i>
-                </div>
-
-                <p>Followers</p>
-                <h2>128</h2>
-                <small>Your growing community</small>
-            </div>
-
-        </section>
-
-
-        <!-- MY BLOGS -->
-
-        <section class="blogs-section" id="myBlogs">
-
-            <div class="section-header">
-
-                <div>
-                    <h2>My Published Blogs</h2>
-                    <p>Your stories, all in one place.</p>
-                </div>
-
-                <a href="index.html">Explore Community <i class="fa-solid fa-arrow-right"></i></a>
-
-            </div>
-
-            <div class="blog-list" id="myBlogList">
-
-                <div class="empty-state">
-                    <i class="fa-regular fa-file-lines"></i>
-                    <h3>No blogs yet!</h3>
-                    <p>Start writing your first story and share it with the world.</p>
-                    <a href="create-blog.html">Write Your First Blog</a>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- RECENT ACTIVITY -->
-
-        <section class="activity-section">
-
-            <div class="section-header">
-                <div>
-                    <h2>Recent Activity</h2>
-                    <p>Your latest blogging activity.</p>
-                </div>
-            </div>
-
-            <div class="activity-card">
-
-                <div class="activity-icon">
-                    <i class="fa-solid fa-feather-pointed"></i>
-                </div>
-
-                <div>
-                    <h3>Welcome to BlogSpace!</h3>
-                    <p>Your creative journey starts here. Create your first blog today.</p>
-                    <small>Just now</small>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- DRAFTS -->
-
-        <section class="drafts-section" id="drafts">
-
-            <div class="section-header">
-                <div>
-                    <h2>Quick Actions</h2>
-                    <p>Everything you need to get started.</p>
-                </div>
-            </div>
-
-            <div class="quick-actions">
-
-                <a href="create-blog.html">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    <span>Write a Blog</span>
-                </a>
-
-                <a href="index.html">
-                    <i class="fa-solid fa-compass"></i>
-                    <span>Explore Blogs</span>
-                </a>
-
-                <a href="#analytics">
-                    <i class="fa-solid fa-chart-pie"></i>
-                    <span>View Analytics</span>
-                </a>
-
-            </div>
-
-        </section>
-
-    </main>
-
-</div>
-
-
-<script>
-
-// LOAD USER INFORMATION
-
-const user = JSON.parse(localStorage.getItem("blogSpaceUser")) || {
-    name: "Jeevitha",
-    email: ""
-};
-
-const displayName = user.name || user.email?.split("@")[0] || "Writer";
-
-document.getElementById("profileName").textContent = displayName;
-document.getElementById("welcomeName").textContent = displayName;
-document.getElementById("profileAvatar").textContent =
-    displayName.charAt(0).toUpperCase();
-
-
-// LOAD BLOGS
-
-const savedBlogs = JSON.parse(localStorage.getItem("blogSpacePosts")) || [];
-
-const myBlogList = document.getElementById("myBlogList");
-
-const myBlogs = savedBlogs.filter(blog =>
-    !blog.author || blog.author.toLowerCase() === displayName.toLowerCase()
-);
-
-document.getElementById("totalBlogs").textContent = myBlogs.length;
-
-document.getElementById("totalViews").textContent = "0";
-
-document.getElementById("totalLikes").textContent = "0";
-
-
-// DISPLAY BLOGS
-
-if (myBlogs.length > 0) {
-
-    myBlogList.innerHTML = "";
-
-    myBlogs.forEach(blog => {
-
-        const card = document.createElement("div");
-        card.className = "dashboard-blog-card";
-
-        const icon = document.createElement("div");
-        icon.className = "dashboard-blog-icon";
-        icon.innerHTML = '<i class="fa-solid fa-file-lines"></i>';
-
-        const details = document.createElement("div");
-        details.className = "dashboard-blog-details";
-
-        const title = document.createElement("h3");
-        title.textContent = blog.title;
-
-        const description = document.createElement("p");
-        description.textContent = blog.description;
-
-        const category = document.createElement("span");
-        category.textContent = blog.category;
-
-        details.append(title, description, category);
-        card.append(icon, details);
-
-        myBlogList.appendChild(card);
-
-    });
-
-}
-
-
-// SEARCH BLOGS
-
-document.getElementById("dashboardSearch").addEventListener("input", function() {
-
-    const search = this.value.toLowerCase();
-
-    document.querySelectorAll(".dashboard-blog-card").forEach(card => {
-
-        card.style.display = card.innerText.toLowerCase().includes(search)
-            ? "flex"
-            : "none";
-
-    });
-
-});
-
-
-// NOTIFICATIONS
-
-document.getElementById("notifications").addEventListener("click", function() {
-    alert("You're all caught up! 💜");
-});
-
-
-// SETTINGS
-
-document.getElementById("settingsButton").addEventListener("click", function(event) {
-    event.preventDefault();
-    alert("Profile settings will be available in a future update.");
-});
-
-
-// LOGOUT
-
-document.getElementById("logoutButton").addEventListener("click", function() {
-
-    if(confirm("Are you sure you want to log out?")) {
-
-        localStorage.removeItem("blogSpaceUser");
-
-        window.location.href = "login.html";
-
-    }
-
-});
-
-</script>
+    <!-- Dashboard JavaScript -->
+    <script src="dashboard.js"></script>
 
 </body>
 </html>
