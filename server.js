@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
-const authRoutes = require("./routes/authRoutes");
-const blogRoutes = require("./routes/blogRoutes");
+const authRoutes = require("./authRoutes");
+const blogRoutes = require("./blogRoutes");
 const app = express();
 
 // Middleware
