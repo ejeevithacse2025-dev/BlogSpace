@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | BlogSpace</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+    <header class="topbar">
+        <a href="dashboard.html" class="logo">✒ BlogSpace</a>
+        <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+    </header>
+
+    <main class="profile-container">
+        <section class="profile-card">
+
+            <div class="profile-banner"></div>
+
+            <div class="profile-content">
+                <div class="avatar" id="profileAvatar">J</div>
+
+                <h1 id="profileName">Your Name</h1>
+                <p class="role">BlogSpace Writer ✨</p>
+
+                <div class="profile-details">
+                    <div class="detail">
+                        <span>Full Name</span>
+                        <strong id="userName">Loading...</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Email Address</span>
+                        <strong id="userEmail">Loading...</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Account Role</span>
+                        <strong>Writer</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Platform</span>
+                        <strong>BlogSpace Member</strong>
+                    </div>
+                </div>
+
+                <button id="logoutButton" class="logout-btn">
+                    Logout
+                </button>
+
+                <a href="dashboard.html" class="dashboard-link">
+                    Return to Dashboard
+                </a>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f6fc;
+    color: #211b45;
+}
+
+.topbar {
+    background: white;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #8051d8;
+    text-decoration: none;
+}
+
+.back-link {
+    color: #8051d8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.profile-card {
+    background: white;
+    width: 100%;
+    max-width: 650px;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(80, 50, 120, 0.09);
+}
+
+.profile-banner {
+    height: 150px;
+    background: linear-gradient(120deg, #d9c4ff, #f9d9ee);
+}
+
+.profile-content {
+    padding: 0 40px 40px;
+    text-align: center;
+}
+
+.avatar {
+    width: 110px;
+    height: 110px;
+    margin: -55px auto 15px;
+    border: 6px solid white;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8051d8, #e28bc9);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+    font-weight: bold;
+    position: relative;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.role {
+    color: #8b7ba5;
+    margin-bottom: 30px;
+}
+
+.profile-details {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.detail {
+    padding: 18px 15px;
+    border-bottom: 1px solid #eee8f7;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail span {
+    color: #9588a8;
+    font-size: 13px;
+}
+
+.detail strong {
+    font-size: 16px;
+    overflow-wrap: anywhere;
+}
+
+.logout-btn {
+    width: 100%;
+    margin-top: 30px;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #8051d8;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #6537bd;
+}
+
+.dashboard-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #8051d8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@media (max-width: 500px) {
+    .profile-content {
+        padding: 0 20px 30px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+}
