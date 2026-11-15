@@ -1,32 +1,39 @@
-# ✒ BlogSpace
+# BlogSpace ✨
 
-A responsive full-stack blogging platform where users can create, publish, edit, explore, and manage blog posts.
+**Write · Read · Share · Connect**
+
+BlogSpace is a full-stack blogging platform where users can create, publish, explore, and manage blog posts. It provides a simple and user-friendly space for writers to share their thoughts and readers to discover new ideas.
 
 ## 🚀 Features
 
 - User registration and login
 - JWT-based authentication
-- Password hashing using bcrypt
-- Protected private API routes
-- Personalized user dashboard
-- Create, view, edit, and delete blogs
-- View all publicly published blogs
-- User profile page
+- Protected dashboard
+- Personal user profile
+- Create, edit, and delete blog posts
+- Explore and view published blogs
+- View individual blog details
+- Display blogs belonging to the logged-in user
 - Logout functionality
-- User-specific blog management
+- Responsive user interface
 
 ## 🛠️ Technologies Used
 
 **Frontend**
-- HTML
-- CSS
+- HTML5
+- CSS3
 - JavaScript
 
 **Backend**
 - Node.js
 - Express.js
-- MongoDB
+- REST API
+
+**Database**
+- MongoDB Atlas
 - Mongoose
+
+**Authentication**
 - JSON Web Tokens (JWT)
 - bcryptjs
 
@@ -34,39 +41,67 @@ A responsive full-stack blogging platform where users can create, publish, edit,
 
 ```text
 BlogSpace/
+│
 ├── backend/
 │   ├── models/
+│   │   ├── User.js
+│   │   └── Blog.js
 │   ├── routes/
+│   │   ├── authRoutes.js
+│   │   └── blogRoutes.js
 │   ├── server.js
-│   └── package.json
+│   ├── package.json
+│   └── .env
+│
 ├── index.html
 ├── login.html
 ├── register.html
 ├── dashboard.html
 ├── dashboard.css
 ├── dashboard.js
-├── blogs.html
-├── blog-details.html
-├── create-blog.html
-├── edit-blog.html
 ├── profile.html
 ├── profile.css
 ├── profile.js
+├── blogs.html
+├── blogs.css
+├── blogs.js
+├── blog-details.html
+├── blog-details.css
+├── blog-details.js
+├── create-blog.html
+├── edit-blog.html
+├── edit-blog.css
+├── edit-blog.js
+├── auth.css
+├── style.css
+├── script.js
 └── README.md
 ```
 
-## ⚙️ How to Run the Project
+## ⚙️ Installation and Setup
 
-1. Clone or download the repository.
-2. Open the project in VS Code.
-3. Navigate to the backend folder.
-4. Install dependencies:
+### 1. Clone the repository
 
 ```bash
+git clone https://github.com/ejjeevithacse2025-dev/BlogSpace.git
+```
+
+### 2. Open the project
+
+```bash
+cd BlogSpace
+```
+
+### 3. Install backend dependencies
+
+```bash
+cd backend
 npm install
 ```
 
-5. Create a `.env` file inside the backend folder:
+### 4. Configure environment variables
+
+Create a `.env` file inside the backend folder:
 
 ```env
 PORT=5000
@@ -74,27 +109,36 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 ```
 
-6. Start the backend:
+Replace the placeholder values with your own credentials. Never upload your `.env` file to GitHub.
+
+### 5. Start the backend server
 
 ```bash
 npm run dev
 ```
 
-7. Open `index.html` using VS Code Live Server.
+The backend runs at:
 
-## 🔐 Authentication & Security
+`http://localhost:5000`
 
-- JWT authentication for login sessions.
-- Passwords hashed using bcrypt.
-- Protected routes verify authentication tokens.
-- Expired tokens are rejected.
-- Users can access only their own dashboard blogs.
+### 6. Open the frontend
 
-## 👩‍💻 Project Status
+Open `index.html` using VS Code Live Server.
 
-Core backend APIs, authentication, dashboard, blog management, and user profile functionality have been implemented and tested.
+## 🔐 Authentication
 
-## 📌 Developer
+BlogSpace uses JSON Web Tokens (JWT) to authenticate users. Passwords are hashed using bcryptjs before being stored in MongoDB.
 
-E. Jeevitha
+Protected API routes verify the token before allowing users to access their personal blogs or perform account-specific operations.
 
+## 👩‍💻 Developed By
+
+**E. Jeevitha**
+
+Computer Science Engineering Student
+
+GitHub: [ejjeevithacse2025-dev](https://github.com/ejjeevithacse2025-dev)
+
+---
+
+*BlogSpace: Every story deserves a place to be shared.* 💜
