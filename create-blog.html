@@ -745,6 +745,7 @@ input:focus, select:focus {
 </div>
 
 <script>
+
 const titleInput = document.getElementById("blogTitle");
 const categoryInput = document.getElementById("blogCategory");
 const contentEditor = document.getElementById("blogContent");
@@ -756,19 +757,24 @@ const tagList = document.getElementById("tagList");
 let coverImageData = "";
 let tags = ["Technology", "Productivity"];
 
-function showMessage(message) {
+function showMessage(message, isError = false) {
     statusMessage.textContent = message;
     statusMessage.style.display = "block";
+    statusMessage.style.background = isError ? "#ffe5e5" : "#e7f8ed";
+    statusMessage.style.color = isError ? "#b42318" : "#267342";
 }
 
 function updateWordCount() {
     const text = contentEditor.innerText.trim();
     const count = text ? text.split(/\s+/).length : 0;
-    document.getElementById("wordCount").textContent = count + (count === 1 ? " word" : " words");
+
+    document.getElementById("wordCount").textContent =
+        count + (count === 1 ? " word" : " words");
 }
 
 contentEditor.addEventListener("input", updateWordCount);
 
+// Text editor toolbar
 document.querySelectorAll(".toolbar button").forEach(button => {
     button.addEventListener("click", () => {
         const command = button.dataset.command;
@@ -786,77 +792,132 @@ document.querySelectorAll(".toolbar button").forEach(button => {
     });
 });
 
-document.getElementById("formatBlock").addEventListener("change", function() {
+document.getElementById("formatBlock").addEventListener("change", function () {
     contentEditor.focus();
     document.execCommand("formatBlock", false, this.value);
 });
 
-tagInput.addEventListener("keydown", function(event) {
+// Tags
+tagInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         event.preventDefault();
+
         const tag = tagInput.value.trim().replace(/^#/, "");
+
         if (tag && !tags.includes(tag)) {
             tags.push(tag);
             renderTags();
         }
+
         tagInput.value = "";
     }
 });
 
 function renderTags() {
     tagList.innerHTML = "";
+
     tags.forEach((tag, index) => {
         const span = document.createElement("span");
+
         span.className = "tag";
         span.textContent = "#" + tag + " ×";
         span.style.cursor = "pointer";
         span.title = "Click to remove";
+
         span.addEventListener("click", () => {
             tags.splice(index, 1);
             renderTags();
         });
+
         tagList.appendChild(span);
     });
 }
 
-imageInput.addEventListener("change", function() {
+// Cover image
+
+imageInput.addEventListener("change", function () {
     const file = this.files[0];
+
     if (!file) return;
 
-    if (file.size > 2 * 1024 * 1024) {
-        alert("Please choose an image smaller than 2 MB.");
+    if (!file.type.startsWith("image/")) {
+        alert("Please select a valid image.");
         this.value = "";
         return;
     }
 
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        coverImageData = event.target.result;
+    if (file.size > 10 * 1024 * 1024) {
+        alert("Please choose an image smaller than 10 MB.");
+        this.value = "";
+        return;
+    }
+
+    const image = new Image();
+    const objectURL = URL.createObjectURL(file);
+
+    image.onload = function () {
+        const maxWidth = 1200;
+        const maxHeight = 1200;
+
+        let width = image.width;
+        let height = image.height;
+
+        const scale = Math.min(
+            1,
+            maxWidth / width,
+            maxHeight / height
+        );
+
+        width = Math.round(width * scale);
+        height = Math.round(height * scale);
+
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+
+        const context = canvas.getContext("2d");
+
+        context.drawImage(image, 0, 0, width, height);
+
+        // Compress image into JPEG format
+        coverImageData = canvas.toDataURL("image/jpeg", 0.7);
+
         document.getElementById("imagePreview").src = coverImageData;
         document.getElementById("imagePreview").style.display = "block";
         document.getElementById("uploadText").style.display = "none";
+
+        URL.revokeObjectURL(objectURL);
+
+        console.log("Original image size:", file.size);
+        console.log("Compressed image size:", Math.round(coverImageData.length * 0.75));
     };
-    reader.readAsDataURL(file);
+
+    image.onerror = function () {
+        alert("Unable to load this image. Please try another.");
+        URL.revokeObjectURL(objectURL);
+    };
+
+    image.src = objectURL;
 });
 
+
+// Get blog details
 function getBlogData() {
-    const user = JSON.parse(localStorage.getItem("blogSpaceUser") || "{}");
+    const content = contentEditor.innerHTML;
+    const plainText = contentEditor.innerText.trim();
 
     return {
-        id: Date.now(),
-        author: user.name || user.email?.split("@")[0] || "Guest Writer",
         title: titleInput.value.trim(),
+        description: plainText.slice(0, 180),
+        content: content,
         category: categoryInput.value,
-        description: contentEditor.innerText.trim().slice(0, 180),
-        content: contentEditor.innerHTML,
-        plainContent: contentEditor.innerText,
-        image: coverImageData,
         tags: tags,
-        visibility: document.querySelector('input[name="visibility"]:checked').value,
-        date: new Date().toLocaleDateString()
+        image: coverImageData,
+        visibility: document.querySelector('input[name="visibility"]:checked').value
     };
 }
 
+// Validate blog
 function validateBlog() {
     if (!titleInput.value.trim()) {
         alert("Please enter your blog title.");
@@ -879,37 +940,79 @@ function validateBlog() {
     return true;
 }
 
-document.getElementById("publishBtn").addEventListener("click", function() {
+// PUBLISH BLOG TO MONGODB
+document.getElementById("publishBtn").addEventListener("click", async function () {
     if (!validateBlog()) return;
 
+    const token = localStorage.getItem("blogSpaceToken");
+
+    if (!token) {
+        alert("Please log in before publishing a blog.");
+        window.location.href = "login.html";
+        return;
+    }
+
     const blog = getBlogData();
-    const posts = JSON.parse(localStorage.getItem("blogSpacePosts") || "[]");
 
-    posts.unshift(blog);
-    localStorage.setItem("blogSpacePosts", JSON.stringify(posts));
+    this.disabled = true;
+    this.textContent = "Publishing...";
 
-    localStorage.removeItem("blogSpaceDraft");
-    showMessage("Your blog has been published successfully! Redirecting to your dashboard...");
-    window.scrollTo({top: 0, behavior: "smooth"});
+    try {
+        const response = await fetch("http://localhost:5000/api/blogs/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(blog)
+        });
 
-    setTimeout(() => {
-        window.location.href = "dashboard.html";
-    }, 1400);
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Could not publish your blog.");
+        }
+
+        localStorage.removeItem("blogSpaceDraft");
+
+        showMessage("Your blog has been published successfully! Redirecting...");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        setTimeout(() => {
+            window.location.href = "dashboard.html";
+        }, 1500);
+
+    } catch (error) {
+        showMessage(error.message || "Something went wrong. Please try again.", true);
+    } finally {
+        this.disabled = false;
+        this.innerHTML = '<i class="fa-regular fa-paper-plane"></i> Publish Blog ✨';
+    }
 });
 
-document.getElementById("draftBtn").addEventListener("click", function() {
+// Save draft
+document.getElementById("draftBtn").addEventListener("click", function () {
     const draft = getBlogData();
+
     localStorage.setItem("blogSpaceDraft", JSON.stringify(draft));
     showMessage("Your draft has been saved successfully!");
 });
 
-document.getElementById("previewBtn").addEventListener("click", function() {
-    document.getElementById("previewTitle").textContent = titleInput.value || "Your Blog Title";
-    document.getElementById("previewCategory").textContent = categoryInput.value || "No category selected";
-    document.getElementById("previewContent").textContent = contentEditor.innerText || "Your blog content will appear here.";
+// Preview blog
+document.getElementById("previewBtn").addEventListener("click", function () {
+    document.getElementById("previewTitle").textContent =
+        titleInput.value || "Your Blog Title";
+
+    document.getElementById("previewCategory").textContent =
+        categoryInput.value || "No category selected";
+
+    document.getElementById("previewContent").textContent =
+        contentEditor.innerText || "Your blog content will appear here.";
 
     const imageContainer = document.getElementById("previewImageContainer");
     imageContainer.innerHTML = "";
+
     if (coverImageData) {
         const img = document.createElement("img");
         img.src = coverImageData;
@@ -922,15 +1025,18 @@ document.getElementById("previewBtn").addEventListener("click", function() {
     document.getElementById("previewModal").style.display = "flex";
 });
 
-document.getElementById("closePreview").addEventListener("click", function() {
+// Close preview
+document.getElementById("closePreview").addEventListener("click", function () {
     document.getElementById("previewModal").style.display = "none";
 });
 
-document.getElementById("previewModal").addEventListener("click", function(event) {
-    if (event.target === this) this.style.display = "none";
+document.getElementById("previewModal").addEventListener("click", function (event) {
+    if (event.target === this) {
+        this.style.display = "none";
+    }
 });
 
-// Restore a saved draft when the page is reopened.
+// Restore saved draft
 const savedDraft = JSON.parse(localStorage.getItem("blogSpaceDraft") || "null");
 
 if (savedDraft) {
@@ -949,6 +1055,7 @@ if (savedDraft) {
     renderTags();
     updateWordCount();
 }
+
 </script>
 
 </body>
