@@ -2,41 +2,53 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("./User");
+const User = require("../models/User");
 
 const router = express.Router();
+
+// Generate JWT token
+function generateToken(userId) {
+    if (!process.env.JWT_SECRET) {
+        throw new Error("JWT_SECRET is not configured.");
+    }
+
+    return jwt.sign(
+        { userId },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
+    );
+}
 
 // USER REGISTRATION API
 router.post("/register", async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
-        // Check required fields
         if (!name || !email || !password) {
             return res.status(400).json({
                 message: "Please fill in all required fields."
             });
         }
 
-        // Validate email
+        const cleanName = name.trim();
+        const cleanEmail = email.toLowerCase().trim();
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!emailRegex.test(email)) {
+        if (!emailRegex.test(cleanEmail)) {
             return res.status(400).json({
                 message: "Please enter a valid email address."
             });
         }
 
-        // Validate password
         if (password.length < 6) {
             return res.status(400).json({
                 message: "Password must contain at least 6 characters."
             });
         }
 
-        // Check if user already exists
         const existingUser = await User.findOne({
-            email: email.toLowerCase().trim()
+            email: cleanEmail
         });
 
         if (existingUser) {
@@ -45,24 +57,17 @@ router.post("/register", async (req, res) => {
             });
         }
 
-        // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create user
         const newUser = new User({
-            name: name.trim(),
-            email: email.toLowerCase().trim(),
+            name: cleanName,
+            email: cleanEmail,
             password: hashedPassword
         });
 
         await newUser.save();
 
-        // Generate authentication token
-        const token = jwt.sign(
-            { userId: newUser._id },
-            process.env.JWT_SECRET,
-            { expiresIn: "1d" }
-        );
+        const token = generateToken(newUser._id);
 
         res.status(201).json({
             message: "Registration successful!",
@@ -77,13 +82,17 @@ router.post("/register", async (req, res) => {
     } catch (error) {
         console.error("Registration error:", error.message);
 
+        if (error.code === 11000) {
+            return res.status(409).json({
+                message: "An account with this email already exists."
+            });
+        }
+
         res.status(500).json({
             message: "Server error during registration."
         });
     }
 });
-
-module.exports = router;
 
 // USER LOGIN API
 router.post("/login", async (req, res) => {
@@ -96,9 +105,10 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        // Find user by email
+        const cleanEmail = email.toLowerCase().trim();
+
         const user = await User.findOne({
-            email: email.toLowerCase().trim()
+            email: cleanEmail
         });
 
         if (!user) {
@@ -107,8 +117,10 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        // Compare entered password with hashed password
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(
+            password,
+            user.password
+        );
 
         if (!isMatch) {
             return res.status(401).json({
@@ -116,12 +128,7 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        // Generate JWT token
-        const token = jwt.sign(
-            { userId: user._id },
-            process.env.JWT_SECRET,
-            { expiresIn: "1d" }
-        );
+        const token = generateToken(user._id);
 
         res.status(200).json({
             message: "Login successful!",
@@ -142,3 +149,5 @@ router.post("/login", async (req, res) => {
     }
 });
 
+// EXPORT ROUTER
+module.exports = router;
